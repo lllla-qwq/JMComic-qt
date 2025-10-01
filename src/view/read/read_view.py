@@ -464,11 +464,12 @@ class ReadView(QtWidgets.QWidget, QtTaskBase):
             p = QtFileData()
             self.pictureData[index] = p
         if st == Status.FileError:
-            elif len(data) < 16:
-                path=os.path.join(os.path.join(Setting.SavePath.value, config.CachePathDir), "book/{}".format(self.bookId), "{}.jpg".format(index))
-                if os.path.exists(path):
-                    print(path)
-                    os.remove(path)
+            QtOwner().ShowError(Str.GetStr(st))
+        elif len(data) < 16:
+            path=os.path.join(os.path.join(Setting.SavePath.value, config.CachePathDir), "book/{}".format(self.bookId), "{}.jpg".format(index))
+            if os.path.exists(path):
+                print(path)
+                os.remove(path)
             QtOwner().ShowError(Str.GetStr(st))
         elif st != Status.Ok:
             p.state = p.DownloadReset
